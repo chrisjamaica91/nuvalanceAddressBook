@@ -1,0 +1,11 @@
+<p-menubar [model]="items">
+    <ng-template pTemplate="start">
+        <div class="title">
+            <h4>My Contact Finder</h4>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="end">
+        <button class="regularScreen" *ngIf="loggedIn" type="button" pButton label="Log Out" icon="pi pi-power-off" style="margin-left:.25em" (click)="logOut()"></button>
+        <button class="tinyScreen" *ngIf="loggedIn" type="button" pButton icon="pi pi-power-off" style="margin-left:.25em" (click)="logOut()"></button>
+    </ng-template>
+</p-menubar>
