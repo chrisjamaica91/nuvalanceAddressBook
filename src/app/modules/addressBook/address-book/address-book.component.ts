@@ -24,7 +24,7 @@ export class AddressBookComponent implements OnInit {
 
   submitted = false;
 
-  loading = true;
+  loading = false;
 
   loggedUser: any;
 
@@ -32,18 +32,24 @@ export class AddressBookComponent implements OnInit {
     private addressService: AddressService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-    private authService: AuthService
+    private authService: AuthService,
     ) { }
 
   ngOnInit(): void {
-    this.addressService.getContacts().subscribe(data => {
-      console.log('Address Data: ', data);
-      this.contacts = data.results;
+    if (!this.addressService.contactList || this.addressService.contactList.length === 0) {
+      this.loading = true;
+      this.addressService.getContacts().subscribe(data => {
+        console.log('Address Data: ', data);
+        this.contacts = data.results;
+        this.addressService.contactList = this.contacts;
+        this.loggedUser = this.authService.loggedUser;
+        this.loading = false;
+      });
+    } else {
+      this.contacts = this.addressService.contactList;
       this.loggedUser = this.authService.loggedUser;
-      this.loading = false;
-    });
+    }
   }
-
 
   deleteSelectedContacts() {
     this.confirmationService.confirm({
@@ -58,14 +64,16 @@ export class AddressBookComponent implements OnInit {
     });
   }
 
-  editContact(contact: any) {
+  editContact(event: Event, contact: any) {
+    event.stopPropagation();
     this.contact = {...contact};
     const oldinfo = contact;
     this.oldContactInfo = oldinfo;
     this.contactDialog = true;
   }
 
-  deleteContact(contact: any) {
+  deleteContact(event: Event, contact: any) {
+    event.stopPropagation();
     this.confirmationService.confirm({
         message: 'Are you sure you want to delete ' + contact.name.first + ' ' + contact.name.last + '?',
         header: 'Confirm',

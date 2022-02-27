@@ -1,0 +1,64 @@
+:host {
+    p-card {
+        margin-top: 5%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    p {
+        font-weight: 700;
+        display: inline;
+    }
+
+    
+    .header-container {
+        text-align: center;
+    }
+
+    img {
+        border-radius: 100px;
+    }
+    
+    .profile-image {
+        display: inline;
+    }
+    
+    .basic-info {
+        display: inline;
+        
+        .full-name {
+            font-weight: 700;
+            font-size: 40px;
+            display: block;
+        }
+
+        .email {
+            color: lightgrey;
+            font-size: 20px;
+        }
+    }
+    
+    .footer {
+        padding-top: 30px;
+        
+        .pi-arrow-circle-left:before {
+            margin-right: 10px;
+        }
+        
+        .pi-arrow-circle-left {
+            color: skyblue;
+            font-size: 20px;
+            &:hover {
+                color: #4169E1;
+                cursor: pointer;
+            }
+        }
+    }
+
+    td {
+        padding-bottom: 1em;
+        padding-left: 15px;
+    }
+}

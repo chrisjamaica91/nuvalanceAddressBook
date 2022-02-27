@@ -7,7 +7,7 @@ import { ContactDetailsComponent } from './address-book/contact-details/contact-
 
 const routes: Routes = [
   { path: 'address-book', component: AddressBookComponent, canActivate: [AddressBookGuard] },
-  { path: 'address-book/details/:id', component: ContactDetailsComponent, canActivate: [AddressBookGuard]},
+  { path: 'details/:id', component: ContactDetailsComponent, canActivate: [AddressBookGuard] },
   { path: '',   redirectTo: '/address-book', pathMatch: 'full' },
   { path: '**',   redirectTo: '/address-book', pathMatch: 'full' },
 ];

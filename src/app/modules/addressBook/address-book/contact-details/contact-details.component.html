@@ -1,1 +1,72 @@
-<p>contact-details works!</p>
+<p-card>
+    <div class="header-container">
+        <div class="profile-image">
+            <img src={{contact.picture.large}}/>
+        </div>
+        <div class="basic-info">
+            <span class="full-name">{{contact.name.first}} {{contact.name.last}}</span>
+            <span class="email"> {{contact.email}}</span>
+        </div>
+    </div>
+
+    <hr class="divider">
+    
+    <table>
+        <tr>
+            <td>
+                <p>Street: </p>
+                {{contact.location.street.number}} {{contact.location.street.name}}
+            </td>
+            <td>
+                <p>City:</p>
+                {{ contact.location.city }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>State:</p>
+                {{ contact.location.state}}
+            </td>
+            <td>
+                <p>Country:</p>
+                {{ contact.location.country }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>Post Code:</p>
+                {{ contact.location.postcode }}
+            </td>
+            <td>
+                <p>Username:</p>
+                {{ contact.login.username }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>DOB:</p>
+                {{ contact.dob.date | date }}
+            </td>
+            <td>
+                <p>Age:</p>
+                {{ contact.dob.age }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>Gender:</p>
+                {{ contact.gender }}
+            </td>
+            <td>
+                <p>Mobile:</p>
+                {{ contact.cell }}
+            </td>
+        </tr>
+    </table>
+
+    <hr>
+
+    <div class="footer">
+        <i class="pi pi-arrow-circle-left" (click)="navToAddress()">Back</i>
+    </div>
+</p-card>

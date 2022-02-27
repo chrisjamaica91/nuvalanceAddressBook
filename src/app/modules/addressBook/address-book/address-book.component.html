@@ -31,9 +31,9 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-contact>
-            <tr>
+            <tr [routerLink]="['/details', contact.login.uuid]">
                 <td *ngIf="loggedUser?.permissions?.delete">
-                    <p-tableCheckbox [value]="contact"></p-tableCheckbox>
+                    <p-tableCheckbox (click)="$event.stopPropagation()" [value]="contact"></p-tableCheckbox>
                 </td>
                 <td><img src={{contact.picture.thumbnail}}/></td>
                 <td>{{contact.name.first}} {{contact.name.last}}</td>
@@ -42,8 +42,8 @@
                 <td>{{contact.location.state}}</td>
                 <td>{{contact.location.postcode}}</td>
                 <td>
-                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editContact(contact)"></button>
-                    <button *ngIf= "loggedUser?.permissions?.delete" pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteContact(contact)"></button>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editContact($event, contact)"></button>
+                    <button *ngIf= "loggedUser?.permissions?.delete" pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteContact($event, contact)"></button>
                 </td>
             </tr>
         </ng-template>

@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class AddressService {
 
+  contactList: any[];
+
   constructor(private httpClient: HttpClient) { }
 
   getContacts(): Observable<any> {

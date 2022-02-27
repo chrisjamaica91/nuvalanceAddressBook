@@ -21,7 +21,6 @@
 
     .p-button.p-button-icon-only.p-button-warning {
         margin-left: 10px;
-
         @media screen and (max-width: 1250px) {
             margin-left: 0px;
             margin-top: 10px;
@@ -82,6 +81,10 @@
     .field {
         padding-bottom: 15px;
     }
+
+    tr :hover {
+        cursor: pointer;
+    }
 }
 
 p-progressSpinner {
@@ -90,6 +93,10 @@ p-progressSpinner {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+img {
+    border-radius: 30px;
 }
 
 @media screen and (max-width: 960px) {
