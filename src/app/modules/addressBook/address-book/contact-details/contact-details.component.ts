@@ -22,8 +22,9 @@ export class ContactDetailsComponent implements OnInit {
   }
 
   setContact(uuId: string) {
-    this.contact = this.addressService.contactList.find(user => user.login.uuid === uuId);
-    console.log('Found contact: ', this.contact);
+    if (this.addressService.contactList) {
+      this.contact = this.addressService.contactList.find(user => user.login.uuid === uuId);
+    }
   }
 
   navToAddress() {

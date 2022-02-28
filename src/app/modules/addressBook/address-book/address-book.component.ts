@@ -36,6 +36,10 @@ export class AddressBookComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.setContactList();
+  }
+  
+  setContactList() {
     if (!this.addressService.contactList || this.addressService.contactList.length === 0) {
       this.loading = true;
       this.addressService.getContacts().subscribe(data => {
@@ -64,16 +68,20 @@ export class AddressBookComponent implements OnInit {
     });
   }
 
-  editContact(event: Event, contact: any) {
-    event.stopPropagation();
+  editContact(event?: Event, contact?: any) {
+    if (event) {
+      event.stopPropagation();
+    }
     this.contact = {...contact};
     const oldinfo = contact;
     this.oldContactInfo = oldinfo;
     this.contactDialog = true;
   }
 
-  deleteContact(event: Event, contact: any) {
-    event.stopPropagation();
+  deleteContact(event?: Event, contact?: any) {
+    if (event) {
+      event.stopPropagation();
+    }
     this.confirmationService.confirm({
         message: 'Are you sure you want to delete ' + contact.name.first + ' ' + contact.name.last + '?',
         header: 'Confirm',
@@ -89,12 +97,10 @@ export class AddressBookComponent implements OnInit {
   hideDialog() {
     this.contactDialog = false;
     this.submitted = false;
-    this.contacts[this.findIndexById(this.contact.login.uuid)] = this.oldContactInfo;
   }
 
   saveContact() {
     this.submitted = true;
-
     if (this.contact && this.contact.login.uuid) {
         this.contacts[this.findIndexById(this.contact.login.uuid)] = this.contact;
         this.messageService.add({severity:'success', summary: 'Successful', detail: 'Contact Updated', life: 3000});

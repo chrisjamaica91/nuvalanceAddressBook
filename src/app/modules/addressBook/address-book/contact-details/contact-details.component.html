@@ -1,11 +1,11 @@
 <p-card>
     <div class="header-container">
         <div class="profile-image">
-            <img src={{contact.picture.large}}/>
+            <img src={{contact?.picture.large}}/>
         </div>
         <div class="basic-info">
-            <span class="full-name">{{contact.name.first}} {{contact.name.last}}</span>
-            <span class="email"> {{contact.email}}</span>
+            <span class="full-name">{{contact?.name.first}} {{contact?.name.last}}</span>
+            <span class="email"> {{contact?.email}}</span>
         </div>
     </div>
 
@@ -15,51 +15,51 @@
         <tr>
             <td>
                 <p>Street: </p>
-                {{contact.location.street.number}} {{contact.location.street.name}}
+                {{contact?.location.street.number}} {{contact?.location.street.name}}
             </td>
             <td>
                 <p>City:</p>
-                {{ contact.location.city }}
+                {{ contact?.location.city }}
             </td>
         </tr>
         <tr>
             <td>
                 <p>State:</p>
-                {{ contact.location.state}}
+                {{ contact?.location.state}}
             </td>
             <td>
                 <p>Country:</p>
-                {{ contact.location.country }}
+                {{ contact?.location.country }}
             </td>
         </tr>
         <tr>
             <td>
                 <p>Post Code:</p>
-                {{ contact.location.postcode }}
+                {{ contact?.location.postcode }}
             </td>
             <td>
                 <p>Username:</p>
-                {{ contact.login.username }}
+                {{ contact?.login.username }}
             </td>
         </tr>
         <tr>
             <td>
                 <p>DOB:</p>
-                {{ contact.dob.date | date }}
+                {{ contact?.dob.date | date }}
             </td>
             <td>
                 <p>Age:</p>
-                {{ contact.dob.age }}
+                {{ contact?.dob.age }}
             </td>
         </tr>
         <tr>
             <td>
                 <p>Gender:</p>
-                {{ contact.gender }}
+                {{ contact?.gender }}
             </td>
             <td>
                 <p>Mobile:</p>
-                {{ contact.cell }}
+                {{ contact?.cell }}
             </td>
         </tr>
     </table>

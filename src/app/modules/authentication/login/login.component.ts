@@ -21,14 +21,14 @@ export class LoginComponent implements OnInit {
     private messageService: MessageService) { }
 
   ngOnInit(): void {
+    this.createFormGroup();
+  }
+  
+  createFormGroup() {
     this.formData = new FormGroup({
       userName: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required])
     });
-  }
-
-  get fData() {
-    return this.formData.controls;
   }
 
   submitLogin(data: any) {
