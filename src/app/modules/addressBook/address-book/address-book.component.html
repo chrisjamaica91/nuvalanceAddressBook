@@ -1,0 +1,110 @@
+<p-toast></p-toast>
+<p-progressSpinner *ngIf="loading"></p-progressSpinner>
+<div *ngIf="!loading">
+    <p-table #dt [value]="contacts" [rows]="10" [paginator]="true" [globalFilterFields]="['name.first','location.street.number','location.city', 'location.state', 'location.postcode']" responsiveLayout="scroll"
+        [(selection)]="selectedContacts" [rowHover]="true" dataKey="login.uuid"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+                <h5 class="m-0">Manage Contacts</h5>
+                <span class="p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')" placeholder="Search..." />
+                </span>
+                <span>
+                    <button *ngIf="loggedUser?.permissions?.delete" pButton pRipple label="Delete" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelectedContacts()" [disabled]="!selectedContacts || !selectedContacts.length"></button>
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th *ngIf="loggedUser?.permissions?.delete" style="width: 3rem">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th></th>
+                <th pSortableColumn="name.first">Name <p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="location.street.number">Street <p-sortIcon field="street"></p-sortIcon></th>
+                <th pSortableColumn="location.city">City <p-sortIcon field="city"></p-sortIcon></th>
+                <th pSortableColumn="location.state">State <p-sortIcon field="state"></p-sortIcon></th>
+                <th pSortableColumn="location.postcode">Zip <p-sortIcon field="zip"></p-sortIcon></th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-contact>
+            <tr [routerLink]="['/details', contact.login.uuid]">
+                <td *ngIf="loggedUser?.permissions?.delete">
+                    <p-tableCheckbox (click)="$event.stopPropagation()" [value]="contact"></p-tableCheckbox>
+                </td>
+                <td><img src={{contact.picture.thumbnail}}/></td>
+                <td>{{contact.name.first}} {{contact.name.last}}</td>
+                <td>{{contact.location.street.number}} {{contact.location.street.name}}</td>
+                <td>{{contact.location.city}}</td>
+                <td>{{contact.location.state}}</td>
+                <td>{{contact.location.postcode}}</td>
+                <td>
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mr-2" (click)="editContact($event, contact)"></button>
+                    <button *ngIf= "loggedUser?.permissions?.delete" pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="deleteContact($event, contact)"></button>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                In total there are {{contacts ? contacts.length : 0 }} contacts.
+            </div>
+        </ng-template>
+    </p-table>
+</div>
+
+<p-dialog [(visible)]="contactDialog" [style]="{width: '450px'}" header="Contact Details" [modal]="true" styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="field">
+            <label for="firstName">First Name</label>
+            <input type="text" pInputText id="firstName" [(ngModel)]="contact.name.first" required autofocus />
+            <small class="p-error" *ngIf="submitted && !contact.name.first">First name is required.</small>
+        </div>
+
+        <div class="field">
+            <label for="lastName">Last Name</label>
+            <input type="text" pInputText id="lastName" [(ngModel)]="contact.name.last" required autofocus />
+            <small class="p-error" *ngIf="submitted && !contact.name.last">Last name is required.</small>
+        </div>
+
+        <div class="field">
+            <label for="streetNumber">Street Number</label>
+            <p-inputNumber type="text" id="streetNumber" [(ngModel)]="contact.location.street.number" [useGrouping]="false"></p-inputNumber>
+            <small class="p-error" *ngIf="submitted && !contact.location.street.number">Street number is required.</small>
+        </div>
+
+        <div class="field">
+            <label for="streetName">Street Name</label>
+            <input type="text" pInputText id="streetName" [(ngModel)]="contact.location.street.name" required autofocus />
+            <small class="p-error" *ngIf="submitted && !contact.location.street.name">Street name is required.</small>
+        </div>
+
+
+        <div class="field">
+            <label for="city">City</label>
+            <input type="text" pInputText id="city" [(ngModel)]="contact.location.city" required autofocus />
+            <small class="p-error" *ngIf="submitted && !contact.location.city">City is required.</small>
+        </div>
+
+        <div class="formgrid grid">
+            <div class="field col">
+                <label for="state">State</label>
+                <input type="text" pInputText id="state" [(ngModel)]="contact.location.state" required autofocus />
+            </div>
+
+            <div class="field col">
+                <label for="postCode">Postal Code</label>
+                <p-inputNumber id="postCode" [(ngModel)]="contact.location.postcode" [useGrouping]="false"></p-inputNumber>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+        <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveContact()"></button>
+    </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

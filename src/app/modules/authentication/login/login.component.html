@@ -1,0 +1,28 @@
+<p-toast></p-toast>
+
+<div class="loginForm">
+    <p-card header="Please Sign In">
+        <div class="col-lg-6">
+            <img src="../../../../assets/Images/addressLoginAvatar.png" width="250" height="250"/>
+        </div>
+        <div class="col-lg-6">
+            <form [formGroup]="formData" (ngSubmit)="submitLogin(formData.value)">
+                <div>
+                    <span class="p-float-label">
+                        <input id="username" type="text" 
+                            formControlName="userName" required pInputText> 
+                        <label for="username">Username</label>
+                    </span>
+                    <span class="p-float-label">
+                        <input id="password" type="password" 
+                            formControlName="password" required pInputText>
+                        <label for="password">Password</label>
+                    </span>
+                </div>
+                <div class="loginButton">
+                    <button pButton class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+                </div>
+            </form>
+        </div>
+    </p-card>
+</div>

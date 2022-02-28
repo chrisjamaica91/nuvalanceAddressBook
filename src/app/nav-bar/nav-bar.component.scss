@@ -1,0 +1,35 @@
+.title {
+    display:inline;
+    float: left;
+    font-size: 18px;
+}
+
+i {
+    width: 20px;
+    height: 20px;
+    padding-right: 15px;
+    :hover {
+        cursor: pointer;
+    }
+}
+
+
+@media screen and (max-width: 400px) {
+    .regularScreen {
+        display: none;
+    }
+
+    .tinyScreen {
+        display: inline;
+    }
+}
+
+@media screen and (min-width: 401px) {
+    .regularScreen {
+        display: inline;
+    }
+    
+    .tinyScreen {
+        display: none;
+    }
+}

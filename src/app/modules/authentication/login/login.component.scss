@@ -1,0 +1,30 @@
+:host ::ng-deep {
+   .p-card-title {
+      text-align: center;
+   }
+}
+
+.loginForm {
+   margin-top: 5%;
+   height: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+ }
+ 
+ input {
+    margin-bottom: 20px;
+ }
+
+ .form-signin-heading {
+    text-align: center;
+ }
+
+ span {
+   display: table;
+   margin: 0 auto;
+}
+
+.loginButton {
+   text-align: center;
+}
