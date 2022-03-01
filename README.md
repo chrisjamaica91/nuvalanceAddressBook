@@ -25,3 +25,17 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Pull Project From Github
+1. Git clone the repository https://github.com/chrisjamaica91/nuvalanceAddressBook.git
+
+2. npm install
+
+3. ng serve
+
+3. navigate to localhost:4200/
+
+## Deploy to AWS S3 Bucket
+1. Build project with ng build --configuration production
+
+2. 
